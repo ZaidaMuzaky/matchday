@@ -1508,8 +1508,8 @@ function ScoreDialog({
   close: () => void;
   save: (a: number, b: number) => void;
 }) {
-  const [a, setA] = useState(m.scoreA === null ? "" : String(m.scoreA));
-  const [b, setB] = useState(m.scoreB === null ? "" : String(m.scoreB));
+  const [a, setA] = useState(m.scoreA === null ? "0" : String(m.scoreA));
+  const [b, setB] = useState(m.scoreB === null ? "0" : String(m.scoreB));
   const [error, setError] = useState("");
   const teams = [
     t.teams.find((team) => team.id === m.teamA)!,
@@ -1548,13 +1548,11 @@ function ScoreDialog({
                 min={0}
                 max={999}
                 step={1}
-                required
                 value={i === 0 ? a : b}
                 onChange={(e) =>
                   i === 0 ? setA(e.target.value) : setB(e.target.value)
                 }
                 autoFocus={i === 0}
-                placeholder="0"
               />
             </label>
           ))}
@@ -1566,7 +1564,8 @@ function ScoreDialog({
           </p>
         )}
         <p className="score-help">
-          No draws in a knockout. Include tie-break points in the final score.
+          Scores start at 0. No draws in a knockout; include tie-break points in
+          the final score.
         </p>
         {error && (
           <p className="form-error" role="alert">

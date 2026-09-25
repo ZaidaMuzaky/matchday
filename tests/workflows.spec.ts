@@ -20,6 +20,10 @@ test("sample workspace, scoring, correction, persistence, and snapshot", async (
     .getByRole("button", { name: "Record score" })
     .click();
   const inputs = page.getByRole("dialog").getByRole("spinbutton");
+  await expect(inputs.nth(0)).toHaveValue("0");
+  await expect(inputs.nth(1)).toHaveValue("0");
+  await page.getByRole("button", { name: "Save result" }).click();
+  await expect(page.getByRole("alert")).toContainText("cannot be tied");
   await inputs.nth(0).fill("2");
   await inputs.nth(1).fill("2");
   await page.getByRole("button", { name: "Save result" }).click();
